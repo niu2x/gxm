@@ -1,0 +1,28 @@
+$#include<gxm/base/log.h>
+
+namespace gxm {
+namespace base {
+
+struct log {
+    struct level {
+        enum {
+            fatal,
+            error,
+            warning,
+            debug,
+            trace
+        };
+    };
+
+    static void set_log_file(const char *pathname);
+    static void set_log_level(int p_log_level);
+
+    static void t(const char *);
+    static void d(const char *);
+    static void w(const char *);
+    static void e(const char *);
+    static void f(const char *);
+};
+
+} 
+}

@@ -1,0 +1,13 @@
+$#include<gxm/main/app.h>
+
+namespace gxm {
+namespace main {
+
+class app {
+public:
+    static int run_app();
+    void       exit(int code);
+};
+
+} // namespace main
+}

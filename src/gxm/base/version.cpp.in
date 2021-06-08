@@ -1,0 +1,26 @@
+#include <gxm/base/version.h>
+
+namespace gxm {
+
+uint32_t version::major() noexcept {
+    return ${GXM_VERSION_MAJOR} + 0;
+}
+
+uint32_t version::minor() noexcept {
+    return ${GXM_VERSION_MINOR} + 0;
+}
+
+uint32_t version::patch() noexcept {
+    return ${GXM_VERSION_PATCH} + 0;
+}
+
+uint32_t version::tweak() noexcept {
+    return ${GXM_VERSION_TWEAK} + 0;
+}
+
+const char *version::c_str() noexcept {
+    static const char v[] = "${GXM_VERSION}";
+    return v;
+}
+
+} // namespace gxm::base
