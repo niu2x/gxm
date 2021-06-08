@@ -1,3 +1,12 @@
+/**
+ * @defgroup   LOG log
+ *
+ * @brief      This file implements log.
+ *
+ * @author     Niu2x
+ * @date       2021
+ */
+
 #ifndef GXM_LOG_H
 #define GXM_LOG_H
 
@@ -12,7 +21,21 @@
 
 namespace gxm {
 
+/**
+ * @addtogroup BASE
+ * @{
+ *
+ * @addtogroup LOG
+ * @{
+ */
+
+/**
+ * @brief      log class
+ */
 struct log {
+    /**
+     * @brief      log's level
+     */
     enum class level {
         fatal,
         error,
@@ -21,11 +44,27 @@ struct log {
         trace,
     };
 
+    /**
+     * @brief      get global default log instance.
+     *
+     * @return     a log instance.
+     */
     static log &get() {
         return default_;
     }
 
+    /**
+     * @brief      write log in a log file.
+     *
+     * @param[in]  pathname  The log file's pathname.
+     */
     void set_log_file(const char *pathname);
+
+    /**
+     * @brief      set log's level.
+     *
+     * @param[in]  p_log_level  The log level
+     */
     void set_log_level(level p_log_level);
 
     void t(const char *message);
@@ -53,6 +92,12 @@ struct log {
 private:
     static log default_;
 };
+
+/**
+ * @}
+ *
+ * @}
+ */
 
 } // namespace gxm
 
