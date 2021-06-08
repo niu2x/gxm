@@ -1,0 +1,16 @@
+$#include<gxm/base/version.h>
+
+namespace gxm {
+namespace base {
+
+struct version {
+    static unsigned int major();
+    static unsigned int minor();
+    static unsigned int patch();
+    static unsigned int tweak();
+
+    static const char *c_str();
+};
+
+} 
+}

@@ -1,0 +1,4 @@
+#ifndef GXM_DRIVER_VS_FRAMEBUFFER_H
+#define GXM_DRIVER_VS_FRAMEBUFFER_H
+
+#endif
