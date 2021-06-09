@@ -58,6 +58,15 @@ private:
 };
 
 /**
+ * @brief      throw a exception
+ *
+ * @param      message  The exception's message
+ *
+ */
+#define GXM_THROW(message)                                           \
+    throw gxm::exception((message), __FILE__, __LINE__)
+
+/**
  * @}
  *
  * @}

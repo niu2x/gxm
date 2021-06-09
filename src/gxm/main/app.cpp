@@ -14,7 +14,7 @@ app::~app() {}
 void app::setup() {
     setup_window();
 
-    vs::set_clear_color(math::color::white);
+    vs::set_clear_color(math::color::black);
 }
 
 void app::cleanup_window() {
@@ -35,7 +35,7 @@ void app::iterate() {
 
 void app::setup_window() {
     // GXM_ASSERT(window_ == nullptr, "window_ isn't nullptr");
-    window_ = std::make_unique<window>();
+    window_ = std::make_unique<window_t>();
     window_->show();
 }
 
@@ -52,15 +52,5 @@ void app::exit(int code) {
 //         }
 //     }
 // }
-
-int app::run_app() {
-    app my_app;
-    my_app.setup();
-    while (!my_app.should_exit()) {
-        my_app.iterate();
-    }
-    my_app.cleanup();
-    return my_app.exit_code();
-}
 
 } // namespace gxm::main

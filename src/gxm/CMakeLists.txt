@@ -6,12 +6,12 @@ include_directories(${CMAKE_BINARY_DIR}/src)
 
 add_subdirectory(base) 
 add_subdirectory(core) 
-# add_subdirectory(main)
+add_subdirectory(main)
 add_subdirectory(math)
 # add_subdirectory(script/lua) 
 # add_subdirectory(script_bindings/lua) 
-# add_subdirectory(driver/window/glfw)
-# add_subdirectory(driver/vs/opengl_4)
+add_subdirectory(driver/window/glfw)
+add_subdirectory(driver/vs/opengl_4)
 
 add_library(gxm_runtime "") 
 target_sources(gxm_runtime PRIVATE gxm.cpp)
@@ -27,8 +27,11 @@ target_include_directories(gxm_runtime INTERFACE
 
 target_link_libraries(gxm_runtime PRIVATE 
 	gxm_base
-	gxm_math
 	gxm_core
+	gxm_math
+	gxm_driver_window
+	gxm_driver_vs
+	gxm_main
 )
 
 

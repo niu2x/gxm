@@ -5,4 +5,5 @@ function(build_application name)
 	target_link_libraries(${name} PRIVATE gxm_runtime)
 endfunction()
 
-build_application(0_helloworld)
+build_application(0_hello_world)
+build_application(1_empty_window)

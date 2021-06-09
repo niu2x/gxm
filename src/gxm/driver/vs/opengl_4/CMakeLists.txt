@@ -10,7 +10,7 @@ target_sources(gxm_driver_vs PRIVATE
 	${source}
 )
 
-target_link_libraries(gxm_driver_vs PRIVATE 
+target_link_libraries(gxm_driver_vs PUBLIC 
 	GLEW::GLEW
     OpenGL::OpenGL
     gxm_math

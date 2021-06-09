@@ -6,4 +6,6 @@
 #include <gxm/base/version.h>
 #include <gxm/base/log.h>
 
+#include <gxm/main/app.h>
+
 #endif

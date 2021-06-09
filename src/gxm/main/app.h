@@ -1,18 +1,29 @@
 #ifndef GXM_MAIN_APP_H
 #define GXM_MAIN_APP_H
 
-#include <gxm/common.h>
+#include <boost/noncopyable.hpp>
+
 #include <gxm/driver/window/window.h>
 #include <gxm/driver/vs/vs.h>
+#include <gxm/base/assert.h>
 
 namespace gxm::main {
 
 class app : private boost::noncopyable {
 public:
-    using window = driver::window::window;
+    using window_t = driver::window::window;
     using vs     = driver::vs::vs;
 
-    static int run_app();
+    template <class APP>
+    static int run_app() {
+        APP my_app;
+        my_app.setup();
+        while (!my_app.should_exit()) {
+            my_app.iterate();
+        }
+        my_app.cleanup();
+        return my_app.exit_code();
+    }
 
     app();
     ~app();
@@ -32,11 +43,15 @@ public:
     }
     void exit(int code);
 
+    window_t *window() noexcept {
+        return window_.get();
+    }
+
 private:
     int  exit_code_;
     bool should_exit_;
 
-    uptr<window> window_;
+    uptr<window_t> window_;
 
     void setup_window();
     void cleanup_window();

@@ -1,8 +1,8 @@
 #ifndef GXM_DRIVER_VS_VS_H
 #define GXM_DRIVER_VS_VS_H
 
-#include <gxm/math/math.h>
 #include <gxm/driver/vs/blend.h>
+#include <gxm/math/color.h>
 
 namespace gxm::driver::vs {
 

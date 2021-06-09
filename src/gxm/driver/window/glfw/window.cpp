@@ -1,8 +1,11 @@
 #include <gxm/driver/window/window.h>
 
+#include <string.h>
+
 #include <GLFW/glfw3.h>
 
-#include <string.h>
+#include <gxm/base/assert.h>
+#include <gxm/core/to_string.h>
 
 namespace gxm::driver::window {
 
@@ -11,11 +14,13 @@ namespace {
 // GLFWwindow *window, int key, int scancode, int action, int mods);
 
 void size_change_callback(GLFWwindow *p_window, int w, int h) {
-    auto *my_app = reinterpret_cast<window *>(
-        glfwGetWindowUserPointer(p_window));
+    auto *user_data = glfwGetWindowUserPointer(p_window);
+    auto *my_app    = reinterpret_cast<window *>(user_data);
+
     GXM_ASSERT_W(my_app, "my_app is nullptr");
+
     if (my_app) {
-        my_app->after_size_change(w, h);
+        my_app->after_size_change(math::isize{w, h});
     }
 }
 
@@ -60,12 +65,15 @@ bool window::iterate() {
     return glfwWindowShouldClose(data_->window);
 }
 
-void window::after_size_change(int w, int h) {
-    glViewport(0, 0, w, h);
+void window::after_size_change(const math::isize &p_size) {
+    glViewport(0, 0, p_size.width, p_size.height);
+    GXM_LOG_D(
+        std::string("after_size_change ") +
+        core::to_string<math::isize>::cvt(p_size));
 }
 
-// void app::size_change_callback(GLFWwindow *window, int w, int h) {
-
-// }
+void window::set_window_size(const math::isize &size) {
+    glfwSetWindowSize(data_->window, size.width, size.height);
+}
 
 } // namespace gxm::driver::window
