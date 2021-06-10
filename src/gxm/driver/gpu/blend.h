@@ -58,8 +58,7 @@ public:
             this->src_factor_      = other.src_factor_;
             this->dst_factor_      = other.dst_factor_;
             this->op_              = other.op_;
-            this->src_const_color_ = other.src_const_color_;
-            this->dst_const_color_ = other.dst_const_color_;
+            this->const_color_     = other.const_color_;
         }
         return *this;
     }
@@ -71,8 +70,7 @@ public:
         return this->src_factor_ != other.src_factor_ ||
                this->dst_factor_ != other.dst_factor_ ||
                this->op_ != other.op_ ||
-               this->src_const_color_ != other.src_const_color_ ||
-               this->dst_const_color_ != other.dst_const_color_;
+               this->const_color_ != other.const_color_;
     }
 
     factor_t src_factor() const noexcept {
@@ -99,28 +97,19 @@ public:
         op_ = op;
     }
 
-    const color &src_const_color() const noexcept {
-        return src_const_color_;
+    const color &const_color() const noexcept {
+        return const_color_;
     }
 
-    const color &dst_const_color() const noexcept {
-        return dst_const_color_;
-    }
-
-    void set_src_const_color(const color &c) noexcept {
-        src_const_color_ = c;
-    }
-
-    void set_dst_const_color(const color &c) noexcept {
-        dst_const_color_ = c;
+    void set_const_color(const color &c) noexcept {
+        const_color_ = c;
     }
 
 private:
     factor_t src_factor_;
     factor_t dst_factor_;
     op_t     op_;
-    color    src_const_color_;
-    color    dst_const_color_;
+    color    const_color_;
 };
 
 } // namespace gxm::driver::gpu

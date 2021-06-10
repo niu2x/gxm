@@ -8,7 +8,6 @@ namespace gxm::driver::gpu {
 void gpu::clear() {
     static auto bits = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
                        GL_STENCIL_BUFFER_BIT;
-
     glClear(bits);
 }
 void gpu::force_set_clear_color(const color &p_color) {
@@ -55,7 +54,11 @@ void gpu::force_set_blend(const blend &p_blend) {
     glBlendFunc(
         factor_map[(int)p_blend.src_factor()],
         factor_map[(int)p_blend.dst_factor()]);
+
     glBlendEquation(equation_map[(int)p_blend.op()]);
+
+    auto &&cc = p_blend.const_color();
+    glBlendColor(cc.r, cc.g, cc.b, cc.a);
 }
 
 } // namespace gxm::driver::gpu
