@@ -2,8 +2,6 @@
 
 #include <cstdlib>
 
-#include <gxm/driver/vs/vs.h>
-
 namespace gxm::main {
 
 app::app()
@@ -14,7 +12,7 @@ app::~app() {}
 void app::setup() {
     setup_window();
 
-    vs::set_clear_color(math::color::black);
+    gpu::get().set_clear_color(math::color::black);
 }
 
 void app::cleanup_window() {
@@ -28,7 +26,7 @@ void app::cleanup() {
 void app::iterate() {
     GXM_ASSERT_W(!should_exit_, "");
     // render_->iterate();
-    vs::clear();
+    gpu::get().clear();
     if (window_->iterate())
         should_exit_ = true;
 }

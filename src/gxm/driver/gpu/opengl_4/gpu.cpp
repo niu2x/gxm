@@ -1,21 +1,21 @@
-#include <gxm/driver/vs/vs.h>
+#include <gxm/driver/gpu/gpu.h>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-namespace gxm::driver::vs {
+namespace gxm::driver::gpu {
 
-void vs::clear() {
+void gpu::clear() {
     static auto bits = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
                        GL_STENCIL_BUFFER_BIT;
 
     glClear(bits);
 }
-void vs::set_clear_color(const color &p_color) {
+void gpu::force_set_clear_color(const color &p_color) {
     glClearColor(p_color.r, p_color.g, p_color.b, p_color.a);
 }
 
-void vs::force_set_blend_enable(bool b) {
+void gpu::force_set_blend_enable(bool b) {
     if (b)
         glEnable(GL_BLEND);
     else
@@ -51,11 +51,11 @@ GLenum equation_map[] = {
 
 } // namespace
 
-void vs::force_set_blend(const blend &p_blend) {
+void gpu::force_set_blend(const blend &p_blend) {
     glBlendFunc(
         factor_map[(int)p_blend.src_factor()],
         factor_map[(int)p_blend.dst_factor()]);
     glBlendEquation(equation_map[(int)p_blend.op()]);
 }
 
-} // namespace gxm::driver::vs
+} // namespace gxm::driver::gpu

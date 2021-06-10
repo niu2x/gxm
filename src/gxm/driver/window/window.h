@@ -10,16 +10,21 @@ namespace gxm::driver::window {
 
 class window : private boost::noncopyable {
 public:
-    struct private_data;
     window();
     ~window();
+
     void show();
     void hide();
+
     bool iterate();
+
+    void set_size(const math::isize &size);
     void after_size_change(const math::isize &size);
-    void set_window_size(const math::isize &size);
+
+    void set_title(const char *title);
 
 private:
+    struct private_data;
     uptr<private_data> data_;
 };
 

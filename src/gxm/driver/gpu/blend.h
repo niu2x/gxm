@@ -1,7 +1,9 @@
 #ifndef GXM_DRIVER_VS_BLEND_H
 #define GXM_DRIVER_VS_BLEND_H
 
-namespace gxm::driver::vs {
+#include <gxm/math/color.h>
+
+namespace gxm::driver::gpu {
 
 class blend {
 public:
@@ -30,6 +32,8 @@ public:
         max,
     };
 
+    using color = math::color;
+
     static blend zero;
     static blend one;
     static blend normal;
@@ -51,20 +55,24 @@ public:
 
     blend &operator=(const blend &other) {
         if (this != &other) {
-            this->src_factor_ = other.src_factor_;
-            this->dst_factor_ = other.dst_factor_;
-            this->op_         = other.op_;
+            this->src_factor_      = other.src_factor_;
+            this->dst_factor_      = other.dst_factor_;
+            this->op_              = other.op_;
+            this->src_const_color_ = other.src_const_color_;
+            this->dst_const_color_ = other.dst_const_color_;
         }
         return *this;
     }
     bool operator==(const blend &other) const noexcept {
-        return this->src_factor_ == other.src_factor_ &&
-               this->dst_factor_ == other.dst_factor_ &&
-               this->op_ == other.op_;
+        return !(*this != other);
     }
 
     bool operator!=(const blend &other) const noexcept {
-        return !(*this == other);
+        return this->src_factor_ != other.src_factor_ ||
+               this->dst_factor_ != other.dst_factor_ ||
+               this->op_ != other.op_ ||
+               this->src_const_color_ != other.src_const_color_ ||
+               this->dst_const_color_ != other.dst_const_color_;
     }
 
     factor_t src_factor() const noexcept {
@@ -87,16 +95,34 @@ public:
         dst_factor_ = f;
     }
 
-    void set_op(op_t op) {
+    void set_op(op_t op) noexcept {
         op_ = op;
+    }
+
+    const color &src_const_color() const noexcept {
+        return src_const_color_;
+    }
+
+    const color &dst_const_color() const noexcept {
+        return dst_const_color_;
+    }
+
+    void set_src_const_color(const color &c) noexcept {
+        src_const_color_ = c;
+    }
+
+    void set_dst_const_color(const color &c) noexcept {
+        dst_const_color_ = c;
     }
 
 private:
     factor_t src_factor_;
     factor_t dst_factor_;
     op_t     op_;
+    color    src_const_color_;
+    color    dst_const_color_;
 };
 
-} // namespace gxm::driver::vs
+} // namespace gxm::driver::gpu
 
 #endif

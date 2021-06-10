@@ -4,7 +4,7 @@
 #include <boost/noncopyable.hpp>
 
 #include <gxm/driver/window/window.h>
-#include <gxm/driver/vs/vs.h>
+#include <gxm/driver/gpu/gpu.h>
 #include <gxm/base/assert.h>
 
 namespace gxm::main {
@@ -12,7 +12,7 @@ namespace gxm::main {
 class app : private boost::noncopyable {
 public:
     using window_t = driver::window::window;
-    using vs     = driver::vs::vs;
+    using gpu      = driver::gpu::gpu;
 
     template <class APP>
     static int run_app() {
