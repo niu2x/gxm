@@ -1,7 +1,7 @@
 #ifndef GXM_MATH_COLOR_H
 #define GXM_MATH_COLOR_H
 
-#include <cmath>
+#include <gxm/math/base.h>
 
 namespace gxm::math {
 
@@ -22,14 +22,7 @@ public:
         return color{r, g, b, 1};
     }
 
-    union {
-        struct {
             double r, g, b, a;
-        };
-        struct {
-            double channels[4];
-        };
-    };
 
     color &operator+(const color &other) noexcept {
         this->r += other.r;
@@ -81,6 +74,17 @@ public:
         auto result = *this;
         return result.normalized();
     };
+
+    bool operator==(const color &other) const noexcept {
+        return GXM_MATH_FLOATING_POINT_EQUAL(r, other.r) &&
+               GXM_MATH_FLOATING_POINT_EQUAL(g, other.g) &&
+               GXM_MATH_FLOATING_POINT_EQUAL(b, other.b) &&
+               GXM_MATH_FLOATING_POINT_EQUAL(a, other.a);
+    }
+
+    bool operator!=(const color &other) const noexcept {
+        return !(*this == other);
+    }
 
     // color& operator/(const color &other);
 };

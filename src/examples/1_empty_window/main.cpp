@@ -6,9 +6,12 @@ class my_app : public gxm::main::app {
 public:
     void setup() {
         gxm::main::app::setup();
+
         GXM_LOG_D("before set window size");
-        window()->set_window_size({1024, 400});
+        window()->set_size({600, 480});
         GXM_LOG_D("after set window size");
+
+        window()->set_title("1_empty_window");
     }
 };
 

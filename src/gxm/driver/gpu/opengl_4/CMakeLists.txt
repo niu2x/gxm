@@ -14,4 +14,5 @@ target_link_libraries(gxm_driver_vs PUBLIC
 	GLEW::GLEW
     OpenGL::OpenGL
     gxm_math
+    gxm_core
 )

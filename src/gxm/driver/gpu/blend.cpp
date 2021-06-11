@@ -1,6 +1,6 @@
-#include <gxm/driver/vs/blend.h>
+#include <gxm/driver/gpu/blend.h>
 
-namespace gxm::driver::vs {
+namespace gxm::driver::gpu {
 
 blend blend::zero(
     blend::factor_t::zero,
@@ -17,4 +17,4 @@ blend blend::normal(
     blend::factor_t::one_minus_src_alpha,
     blend::op_t::add);
 
-} // namespace gxm::driver::vs
+} // namespace gxm::driver::gpu

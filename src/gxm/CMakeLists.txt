@@ -1,5 +1,5 @@
 include(warning_as_error)
-# warning_as_error_enable()
+warning_as_error_enable()
 
 include_directories(${CMAKE_SOURCE_DIR}/src) 
 include_directories(${CMAKE_BINARY_DIR}/src)
@@ -11,7 +11,7 @@ add_subdirectory(math)
 # add_subdirectory(script/lua) 
 # add_subdirectory(script_bindings/lua) 
 add_subdirectory(driver/window/glfw)
-add_subdirectory(driver/vs/opengl_4)
+add_subdirectory(driver/gpu/opengl_4)
 
 add_library(gxm_runtime "") 
 target_sources(gxm_runtime PRIVATE gxm.cpp)

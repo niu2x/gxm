@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include <gxm/core/to_string.h>
+#include <gxm/math/base.h>
 
 namespace gxm::math {
 
@@ -30,9 +31,8 @@ public:
     T height;
 
     bool operator==(const t_size &other) const noexcept {
-        constexpr T epsilon = 0.000001;
-        return std::fabs(width - other.width) < epsilon &&
-               std::fabs(height - other.height) < epsilon;
+        return GXM_MATH_FLOATING_POINT_EQUAL(width, other.width) &&
+               GXM_MATH_FLOATING_POINT_EQUAL(height, other.height);
     }
 };
 

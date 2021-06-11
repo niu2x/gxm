@@ -72,8 +72,12 @@ void window::after_size_change(const math::isize &p_size) {
         core::to_string<math::isize>::cvt(p_size));
 }
 
-void window::set_window_size(const math::isize &size) {
+void window::set_size(const math::isize &size) {
     glfwSetWindowSize(data_->window, size.width, size.height);
+}
+
+void window::set_title(const char *title) {
+    glfwSetWindowTitle(data_->window, title);
 }
 
 } // namespace gxm::driver::window
