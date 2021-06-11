@@ -2,13 +2,6 @@
 
 namespace gxm::math {
 
-namespace {
 
-void test() {
-    size  a;
-    isize b;
-}
-
-} // namespace
 
 } // namespace gxm::math

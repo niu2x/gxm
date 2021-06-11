@@ -2,7 +2,5 @@
 
 namespace gxm::driver::gpu {
 
-gpu::gpu() {}
-gpu::~gpu() {}
 
 } // namespace gxm::driver::gpu

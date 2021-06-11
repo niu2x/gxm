@@ -3,7 +3,30 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <gxm/base/unused.h>
+
 namespace gxm::driver::gpu {
+
+namespace {
+
+struct buffer {
+    GLuint id;
+};
+
+} // namespace
+
+struct gpu::private_data {
+    core::res_owner<buffer> buffers;
+};
+
+gpu::gpu()
+    : data_(nullptr) {
+    data_ = new private_data;
+}
+
+gpu::~gpu() {
+    delete data_;
+}
 
 void gpu::clear() {
     static auto bits = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
@@ -59,6 +82,42 @@ void gpu::force_set_blend(const blend &p_blend) {
 
     auto &&cc = p_blend.const_color();
     glBlendColor(cc.r, cc.g, cc.b, cc.a);
+}
+
+core::rid gpu::buffer_create() {
+    core::rid my_rid    = data_->buffers.new_res();
+    auto *    my_buffer = data_->buffers.get_res(my_rid);
+    glGenBuffers(1, &(my_buffer->id));
+    return my_rid;
+}
+void gpu::buffer_delete(const core::rid &p_rid) {
+    auto *my_buffer = data_->buffers.get_res(p_rid);
+    if (my_buffer) {
+        glDeleteBuffers(1, &(my_buffer->id));
+        data_->buffers.delete_res(p_rid);
+    }
+}
+
+void gpu::buffer_resize(const core::rid &p_rid, size_t bytes) {
+    auto *my_buffer = data_->buffers.get_res(p_rid);
+    if (my_buffer) {
+        glNamedBufferData(
+            my_buffer->id, bytes, nullptr, GL_DYNAMIC_DRAW);
+    }
+}
+void *gpu::buffer_map(const core::rid &p_rid) {
+    auto *my_buffer = data_->buffers.get_res(p_rid);
+    if (my_buffer) {
+        return glMapNamedBuffer(my_buffer->id, GL_READ_WRITE);
+    }
+
+    return nullptr;
+}
+void gpu::buffer_unmap(const core::rid &p_rid) {
+    auto *my_buffer = data_->buffers.get_res(p_rid);
+    if (my_buffer) {
+        glUnmapNamedBuffer(my_buffer->id);
+    }
 }
 
 } // namespace gxm::driver::gpu

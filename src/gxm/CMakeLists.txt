@@ -1,5 +1,5 @@
 include(warning_as_error)
-# warning_as_error_enable()
+warning_as_error_enable()
 
 include_directories(${CMAKE_SOURCE_DIR}/src) 
 include_directories(${CMAKE_BINARY_DIR}/src)

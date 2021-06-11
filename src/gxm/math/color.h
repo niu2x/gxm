@@ -22,14 +22,7 @@ public:
         return color{r, g, b, 1};
     }
 
-    union {
-        struct {
             double r, g, b, a;
-        };
-        struct {
-            double channels[4];
-        };
-    };
 
     color &operator+(const color &other) noexcept {
         this->r += other.r;
