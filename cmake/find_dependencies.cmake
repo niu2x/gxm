@@ -5,7 +5,7 @@ find_package(Boost
 	REQUIRED
 )
 
-find_package(glfw3)
-find_package(OpenGL)
-find_package(GLEW)
+# find_package(glfw3)
+# find_package(OpenGL)
+# find_package(GLEW)
 

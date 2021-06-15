@@ -28,4 +28,5 @@ include(find_dependencies)
 add_subdirectory(src/gxm)
 
 #build example applications
-add_subdirectory(src/examples)
+# add_subdirectory(src/examples)
+add_subdirectory(src/tests)
