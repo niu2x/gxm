@@ -25,21 +25,6 @@ public:
 
     void set_level(level p_level);
 
-    void t(const char *message) {
-        write(level::trace, message);
-    }
-    void d(const char *message) {
-        write(level::debug, message);
-    }
-    void w(const char *message) {
-        write(level::warning, message);
-    }
-    void e(const char *message) {
-        write(level::error, message);
-    }
-    void f(const char *message) {
-        write(level::fatal, message);
-    }
 
     void t(const std::string &message) {
         t(message.c_str());
@@ -55,6 +40,22 @@ public:
     }
     void f(const std::string &message) {
         f(message.c_str());
+    }
+
+    void t(const char *message) {
+        write(level::trace, message);
+    }
+    void d(const char *message) {
+        write(level::debug, message);
+    }
+    void w(const char *message) {
+        write(level::warning, message);
+    }
+    void e(const char *message) {
+        write(level::error, message);
+    }
+    void f(const char *message) {
+        write(level::fatal, message);
     }
 
 private:
