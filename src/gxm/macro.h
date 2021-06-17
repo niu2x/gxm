@@ -3,20 +3,8 @@
 
 #include <cstdint>
 
-namespace gxm {
+#define GXM_UNUSED(x) (void)(x);
 
-template <class T>
-uint8_t unused_one(const T &t) {
-    (void)(t);
-    return 0;
-}
-
-template <class... T>
-void unused(const T &... t) {
-    auto x = {unused_one(t)...};
-    unused_one(x);
-}
-
-} // namespace gxm
+#define GXM_API __attribute__((__visibility__("default")))
 
 #endif

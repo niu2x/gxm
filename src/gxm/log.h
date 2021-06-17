@@ -5,9 +5,11 @@
 
 #include <boost/noncopyable.hpp>
 
+#include <gxm/macro.h>
+
 namespace gxm {
 
-class log : boost::noncopyable {
+class GXM_API log : boost::noncopyable {
 
 public:
     enum class level {

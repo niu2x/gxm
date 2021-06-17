@@ -4,6 +4,7 @@
 #include <cstdint>
 
 #include <gxm/bit.h>
+#include <gxm/macro.h>
 
 namespace gxm::math {
 
@@ -18,24 +19,13 @@ enum class pixel_format {
 
 };
 
-struct color_utils {
-
-    static uint8_t red(const color_t &c) {
-        return GXM_BIT32_B0(c);
-    }
-    static uint8_t green(const color_t &c) {
-        return GXM_BIT32_B1(c);
-    }
-    static uint8_t blue(const color_t &c) {
-        return GXM_BIT32_B2(c);
-    }
-    static uint8_t alpha(const color_t &c) {
-        return GXM_BIT32_B3(c);
-    }
-
-    color_t rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-        return GXM_BIT32(a, b, g, r);
-    }
+struct GXM_API color {
+    union {
+        struct {
+            uint8_t r, g, b, a;
+        } channels;
+        uint32_t rgba;
+    };
 };
 
 } // namespace gxm::math

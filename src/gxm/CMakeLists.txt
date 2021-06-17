@@ -1,7 +1,7 @@
 include(warning_as_error)
 warning_as_error_enable()
 
-add_library(gxm STATIC "")
+add_library(gxm SHARED "")
 
 file(GLOB sources PATTERN "*.cpp")
 target_sources(gxm PRIVATE ${sources})
