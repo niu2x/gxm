@@ -19,15 +19,6 @@ enum class pixel_format {
 
 };
 
-struct GXM_API color {
-    union {
-        struct {
-            uint8_t r, g, b, a;
-        } channels;
-        uint32_t rgba;
-    };
-};
-
 } // namespace gxm::math
 
 #endif

@@ -1,11 +1,10 @@
 #include <gxm/log.h>
 
 int main() {
-    gxm::log my_log;
-    my_log.t("hello world");
-    my_log.d("hello world");
-    my_log.w("hello world");
-    my_log.e("hello world");
-    my_log.f("hello world");
+    GXM_LOG_T("hello world");
+    GXM_LOG_D("hello world");
+    GXM_LOG_W("hello world");
+    GXM_LOG_E("hello world");
+    GXM_LOG_F("hello world");
     return 0;
 }

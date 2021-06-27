@@ -1,20 +1,11 @@
 #include "log.h"
+
+#include <stdio.h>
+#include <stdarg.h>
+
 #include "macro.h"
 
 namespace gxm {
-
-log::log()
-    : level_(level::trace) {}
-
-log::~log() {}
-
-// void log::set_log_file(const char *pathname) {
-//     unused(pathname, pathname, pathname);
-// }
-
-void log::set_level(level p_level) {
-    level_ = p_level;
-}
 
 namespace {
 
@@ -38,12 +29,22 @@ const char *level_names[] = {
 
 } // namespace
 
-void log::write(level p_level, const char *msg) {
-    if (p_level >= level_) {
-        int   lvl = int(p_level);
-        auto *fmt = "\x1b[0m \x1b[90m%s[%s] %s\x1b[0m\n";
-        fprintf(stderr, fmt, level_colors[lvl], level_names[lvl], msg);
-    }
+void log::write(
+    level       p_level,
+    const char *filename,
+    int         line,
+    const char *msg,
+    ...) {
+
+    int   lvl = int(p_level);
+    auto *fmt = "\x1b[0m \x1b[90m%s[%s] %s %d ";
+    fprintf(stderr, fmt, level_colors[lvl], level_names[lvl], filename, line);
+
+    va_list args;
+    va_start(args, msg);
+    vfprintf(stderr, msg, args);
+    fprintf(stderr, "\x1b[0m\n");
+    va_end(args);
 }
 
 } // namespace gxm

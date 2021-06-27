@@ -1,17 +1,11 @@
 #ifndef GXM_LOG_H
 #define GXM_LOG_H
 
-#include <string>
-
-#include <boost/noncopyable.hpp>
-
 #include <gxm/macro.h>
 
 namespace gxm {
 
-class GXM_API log : boost::noncopyable {
-
-public:
+struct log {
     enum class level {
         trace,
         debug,
@@ -20,52 +14,28 @@ public:
         fatal,
     };
 
-    log();
-    ~log();
-
-    // void set_log_file(const char *pathname);
-
-    void set_level(level p_level);
-
-
-    void t(const std::string &message) {
-        t(message.c_str());
-    }
-    void d(const std::string &message) {
-        d(message.c_str());
-    }
-    void w(const std::string &message) {
-        w(message.c_str());
-    }
-    void e(const std::string &message) {
-        e(message.c_str());
-    }
-    void f(const std::string &message) {
-        f(message.c_str());
-    }
-
-    void t(const char *message) {
-        write(level::trace, message);
-    }
-    void d(const char *message) {
-        write(level::debug, message);
-    }
-    void w(const char *message) {
-        write(level::warning, message);
-    }
-    void e(const char *message) {
-        write(level::error, message);
-    }
-    void f(const char *message) {
-        write(level::fatal, message);
-    }
-
-private:
-    level level_;
-
-    void write(level p_level, const char *message);
+    static void write(
+        level       p_level,
+        const char *filename,
+        int         line,
+        const char *message,
+        ...);
 };
 
 } // namespace gxm
+
+#define GXM_LOG_T(message, ...) GXM_LOG_WRITE(trace, message, ##__VA_ARGS__)
+#define GXM_LOG_D(message, ...) GXM_LOG_WRITE(debug, message, ##__VA_ARGS__)
+#define GXM_LOG_W(message, ...) GXM_LOG_WRITE(warning, message, ##__VA_ARGS__)
+#define GXM_LOG_E(message, ...) GXM_LOG_WRITE(error, message, ##__VA_ARGS__)
+#define GXM_LOG_F(message, ...) GXM_LOG_WRITE(fatal, message, ##__VA_ARGS__)
+
+#define GXM_LOG_WRITE(p_level, message, ...)                                   \
+    gxm::log::write(                                                           \
+        gxm::log::level::p_level,                                              \
+        __FILE__,                                                              \
+        __LINE__,                                                              \
+        (message),                                                             \
+        ##__VA_ARGS__)
 
 #endif

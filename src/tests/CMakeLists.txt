@@ -7,3 +7,4 @@ endfunction()
 
 # build_application(blend)
 build_application(log)
+build_application(entry)
