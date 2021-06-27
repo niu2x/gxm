@@ -2,12 +2,21 @@
 
 #include <chrono>
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
 #include "../macro.h"
 
 namespace gxm::gfx {
+
+namespace {
+
+void empty_iterate(float dt) {
+    GXM_UNUSED(dt);
+}
+
+} // namespace
 
 int entry(const app &my_app) {
 
@@ -26,6 +35,15 @@ int entry(const app &my_app) {
     // glfwSetWindowSizeCallback(window, &size_change_callback);
     glfwMakeContextCurrent(window);
 
+    GXM_ASSERT(glewInit() == GLEW_OK, "glew init failed");
+
+    if (my_app.setup)
+        my_app.setup();
+
+    auto *iterate = my_app.iterate;
+    if (!iterate)
+        iterate = empty_iterate;
+
     auto  last_now = std::chrono::steady_clock::now();
     auto  now      = last_now;
     float dt;
@@ -37,12 +55,16 @@ int entry(const app &my_app) {
         glfwPollEvents();
         glfwSwapBuffers(window);
 
-        now      = std::chrono::steady_clock::now();
-        dt       = duration_cast(now - last_now).count() / 1000000.0;
+        now = std::chrono::steady_clock::now();
+        dt  = duration_cast(now - last_now).count() / 1000000.0;
+
         last_now = now;
 
-        my_app.iterate(dt);
+        iterate(dt);
     }
+
+    if (my_app.cleanup)
+        my_app.cleanup();
 
     glfwDestroyWindow(window);
     glfwTerminate();

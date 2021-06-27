@@ -54,6 +54,8 @@ private:
         GXM_THROW(message);                                                    \
     }
 
+#define GXM_ARRAY_SIZE(array) (sizeof(array) / sizeof(array[0]))
+
 // #define GXM_API __attribute__((__visibility__("default")))
 
 #endif

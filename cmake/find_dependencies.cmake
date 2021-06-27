@@ -5,7 +5,14 @@ find_package(Boost
 	REQUIRED
 )
 
-# find_package(glfw3)
-# find_package(OpenGL)
-# find_package(GLEW)
+find_package(glfw3)
+find_package(OpenGL)
+find_package(GLEW)
 
+
+# add_subdirectory(dependencies/fplutil)
+# add_subdirectory(dependencies/vectorial)
+
+set(mathfu_build_benchmarks OFF)
+set(mathfu_build_tests OFF)
+add_subdirectory(dependencies/mathfu)

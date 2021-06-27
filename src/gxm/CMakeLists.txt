@@ -14,4 +14,9 @@ target_sources(gxm PRIVATE ${sources})
 
 target_include_directories(gxm PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
-target_link_libraries(gxm PUBLIC glfw)
+mathfu_configure_flags(gxm)
+target_link_libraries(gxm PUBLIC 
+	glfw
+	GLEW::GLEW
+    OpenGL::OpenGL
+)

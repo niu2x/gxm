@@ -6,4 +6,6 @@
 #include <gxm/math/constant.h>
 #include <gxm/math/color.h>
 
+#include <mathfu/glsl_mappings.h>
+
 #endif
